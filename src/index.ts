@@ -2,7 +2,7 @@ import { createEvent, Store } from "effector";
 
 export type Config = {
   prefixKey?: string;
-  storage?: Storage;
+  storage: Storage;
   expireMs?: number;
 };
 type PersistedState = [number, any];
