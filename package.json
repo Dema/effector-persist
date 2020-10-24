@@ -2,7 +2,7 @@
   "name": "@dmitry.olyenyov/effector-persist",
   "author": "Dmitry Olyenyov",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "allows to store effector's store into different storages (session, local)",
   "repository": "Dema/final-form-validations",
   "private": false,
@@ -15,8 +15,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch",
+    "build": "microbundle --compress",
+    "dev": "microbundle watch --compress",
     "docs": "typedoc --out docs/api src",
     "prepublish": "run-p build docs"
   },

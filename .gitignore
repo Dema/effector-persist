@@ -4,3 +4,4 @@ docs/
 node_modules/
 .snapshots/
 *.min.js
+*.log
