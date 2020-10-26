@@ -50,13 +50,11 @@ export const withPersist = <State>(store: Store<State>, config?: Config) => {
   const persistKey = config?.prefixKey ? `${config.prefixKey}:${name}` : name;
   const rehydrate = createEvent<State>("@PERSIST/REHYDRATE");
 
-  store.watch((state) => {
+  const bindPersistAction = store.watch((state) => {
     config.storage.setItem(persistKey, JSON.stringify([Date.now(), state]));
   });
 
-  const tryRehydrate = async () => {
-    const persistedState = await config.storage.getItem(persistKey);
-
+  config.storage.getItem(persistKey).then((persistedState) => {
     if (persistedState) {
       const parsedState = parseStoredState(persistedState);
 
@@ -65,14 +63,21 @@ export const withPersist = <State>(store: Store<State>, config?: Config) => {
         parsedState[0] + config.expireMs > config.expireMs
       ) {
         config.storage.removeItem(persistKey);
+        bindPersistAction();
       } else {
         store.on(rehydrate, (_state, data) => data);
+        bindPersistAction();
+        // const unwatch = store.watch(rehydrate, () => {
+        // bindPersistAction();
+        // unwatch();
+        // });
         rehydrate(parsedState[1]);
       }
+    } else {
+      bindPersistAction();
     }
-  };
+  });
 
-  tryRehydrate();
   return store;
 };
 /**
