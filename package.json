@@ -2,7 +2,7 @@
   "name": "@dmitry.olyenyov/effector-persist",
   "author": "Dmitry Olyenyov",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "allows to store effector's store into different storages (session, local)",
   "repository": "Dema/final-form-validations",
   "private": false,
