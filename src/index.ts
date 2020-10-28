@@ -7,7 +7,7 @@ export type Config = {
 };
 type PersistedState = [number, any];
 
-export const withPersist = <State>(store: Store<State>, config?: Config) => {
+export const withPersist = <State>(store: Store<State>, config: Config) => {
   const name = store.shortName;
   const persistKey = config?.prefixKey ? `${config.prefixKey}:${name}` : name;
   const rehydrate = createEvent<State>("@PERSIST/REHYDRATE");
